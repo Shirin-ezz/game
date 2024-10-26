@@ -25,18 +25,32 @@ function createBoard() {
     }
 }
 
+// API function to check if a word is valid using Datamuse API
+async function isValidWord(guess) {
+    const response = await fetch(`https://api.datamuse.com/words?sp=${guess}&max=1`);
+    const data = await response.json();
+    return data.length > 0;  // Returns true if the API returns a result, meaning it's a valid word
+}
+
 // Handle the guess submission
-function submitGuess() {
+async function submitGuess() {
     const input = document.getElementById('guess-input');
     const guess = input.value.toLowerCase();
 
-    // Check if the word is exactly 5 letters long
+    // Check if the word is exactly 5 letters
     if (guess.length !== 5) {
         alert('Invalid guess! Please enter a 5-letter word.');
         return;
     }
 
-    // Evaluate the guess
+    // Use the API to check if the word is valid
+    const valid = await isValidWord(guess);
+    if (!valid) {
+        alert('Invalid guess! Please enter a valid word.');
+        return;
+    }
+
+    // Evaluate the guess against the correct word
     for (let i = 0; i < 5; i++) {
         const box = document.getElementById(`box-${attempts}-${i}`);
         box.textContent = guess[i];
@@ -51,7 +65,7 @@ function submitGuess() {
     }
 
     attempts++;
-    
+
     // Check if the player has guessed the word or used all attempts
     if (guess === answer) {
         alert('Congratulations! You guessed the word.');
