@@ -1,8 +1,17 @@
-const words = ["apple", "grape", "pearl", "pride", "drive", "tried", "stone", "smart", "bread", "flame"];
+// Define the array of at least 30 five-letter words
+const words = [
+    "apple", "grape", "pearl", "pride", "drive", "stone", "smart", "bread", "flame", 
+    "globe", "crown", "proud", "swift", "trace", "shine", "blaze", "dream", "light",
+    "charm", "roast", "sneak", "climb", "grasp", "frame", "flock", "bloom", "craze", 
+    "flint", "burst", "slice"
+];
+
+// Randomly select a word from the array as the answer
 let answer = words[Math.floor(Math.random() * words.length)];
 let attempts = 0;
 const maxAttempts = 6;
 
+// Generate the game board
 function createBoard() {
     const gameBoard = document.getElementById('game-board');
     gameBoard.innerHTML = '';
@@ -16,14 +25,17 @@ function createBoard() {
     }
 }
 
+// Handle the guess submission
 function submitGuess() {
     const input = document.getElementById('guess-input');
     const guess = input.value.toLowerCase();
+    
     if (guess.length !== 5 || !words.includes(guess)) {
-        alert('Invalid guess! Please enter a 5-letter word.');
+        alert('Invalid guess! Please enter a 5-letter word from the dictionary.');
         return;
     }
 
+    // Evaluate the guess
     for (let i = 0; i < 5; i++) {
         const box = document.getElementById(`box-${attempts}-${i}`);
         box.textContent = guess[i];
@@ -45,9 +57,10 @@ function submitGuess() {
         document.getElementById('restart-btn').style.display = 'block';
     }
 
-    input.value = ''; 
+    input.value = ''; // Clear input
 }
 
+// Restart the game
 function restartGame() {
     attempts = 0;
     answer = words[Math.floor(Math.random() * words.length)];
@@ -55,7 +68,9 @@ function restartGame() {
     document.getElementById('restart-btn').style.display = 'none';
 }
 
+// Event listeners
 document.getElementById('submit-btn').addEventListener('click', submitGuess);
 document.getElementById('restart-btn').addEventListener('click', restartGame);
 
+// Initialize the game board on page load
 window.onload = createBoard;
