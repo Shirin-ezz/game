@@ -14,7 +14,7 @@ const maxAttempts = 6;
 // Generate the game board
 function createBoard() {
     const gameBoard = document.getElementById('game-board');
-    gameBoard.innerHTML = '';
+    gameBoard.innerHTML = '';  // Clear the board before creating a new one
     for (let i = 0; i < maxAttempts; i++) {
         for (let j = 0; j < 5; j++) {
             const box = document.createElement('div');
@@ -29,9 +29,10 @@ function createBoard() {
 function submitGuess() {
     const input = document.getElementById('guess-input');
     const guess = input.value.toLowerCase();
-    
-    if (guess.length !== 5 || !words.includes(guess)) {
-        alert('Invalid guess! Please enter a 5-letter word from the dictionary.');
+
+    // Check if the word is exactly 5 letters long
+    if (guess.length !== 5) {
+        alert('Invalid guess! Please enter a 5-letter word.');
         return;
     }
 
@@ -39,6 +40,7 @@ function submitGuess() {
     for (let i = 0; i < 5; i++) {
         const box = document.getElementById(`box-${attempts}-${i}`);
         box.textContent = guess[i];
+
         if (guess[i] === answer[i]) {
             box.classList.add('correct');
         } else if (answer.includes(guess[i])) {
@@ -49,23 +51,25 @@ function submitGuess() {
     }
 
     attempts++;
+    
+    // Check if the player has guessed the word or used all attempts
     if (guess === answer) {
         alert('Congratulations! You guessed the word.');
-        document.getElementById('restart-btn').style.display = 'block';
+        document.getElementById('restart-btn').style.display = 'block';  // Show restart button
     } else if (attempts === maxAttempts) {
         alert(`Game over! The word was ${answer}.`);
-        document.getElementById('restart-btn').style.display = 'block';
+        document.getElementById('restart-btn').style.display = 'block';  // Show restart button
     }
 
-    input.value = ''; // Clear input
+    input.value = '';  // Clear input for the next guess
 }
 
 // Restart the game
 function restartGame() {
     attempts = 0;
-    answer = words[Math.floor(Math.random() * words.length)];
-    createBoard();
-    document.getElementById('restart-btn').style.display = 'none';
+    answer = words[Math.floor(Math.random() * words.length)];  // Pick a new random word
+    createBoard();  // Re-create the board for the new game
+    document.getElementById('restart-btn').style.display = 'none';  // Hide restart button
 }
 
 // Event listeners
