@@ -33,11 +33,8 @@ body {
     background-color: gray;
 }
 
-#letter-board {
-    margin-top: 20px;
-}
-
 input, button {
     font-size: 18px;
     padding: 10px;
+    margin: 5px;
 }
