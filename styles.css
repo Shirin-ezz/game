@@ -1,40 +1,103 @@
+/* General styles */
 body {
     font-family: Arial, sans-serif;
     text-align: center;
     margin-top: 50px;
+    background-color: #f3f4f6;
+    color: #333;
 }
 
-#game-board {
-    display: grid;
-    grid-template-columns: repeat(5, 50px);
-    grid-gap: 5px;
-    justify-content: center;
+h1 {
+    font-size: 2.5em;
+    color: #4a5568;
     margin-bottom: 20px;
 }
 
-.letter-box {
-    width: 50px;
-    height: 50px;
-    border: 2px solid black;
-    font-size: 24px;
-    text-align: center;
-    line-height: 50px;
-}
-
-.correct {
-    background-color: green;
-}
-
-.wrong-place {
-    background-color: gold;
-}
-
-.wrong {
-    background-color: gray;
-}
-
-input, button {
-    font-size: 18px;
+/* Game board styles */
+#game-board {
+    display: grid;
+    grid-template-columns: repeat(5, 60px);
+    grid-gap: 10px;
+    justify-content: center;
+    margin-bottom: 20px;
     padding: 10px;
-    margin: 5px;
+    background-color: #e2e8f0;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.letter-box {
+    width: 60px;
+    height: 60px;
+    font-size: 1.5em;
+    font-weight: bold;
+    text-align: center;
+    line-height: 60px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    color: #1a202c;
+}
+
+.letter-box.correct {
+    background-color: #48bb78; /* Green for correct letters */
+    color: white;
+}
+
+.letter-box.wrong-place {
+    background-color: #ecc94b; /* Yellow for misplaced letters */
+    color: white;
+}
+
+.letter-box.wrong {
+    background-color: #a0aec0; /* Gray for incorrect letters */
+    color: white;
+}
+
+/* Hover effect for letter boxes */
+.letter-box:hover {
+    transform: scale(1.05);
+}
+
+/* Input and button styles */
+input#guess-input {
+    font-size: 1.2em;
+    padding: 10px;
+    margin: 10px 5px;
+    width: 150px;
+    border: 2px solid #cbd5e0;
+    border-radius: 5px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+input#guess-input:focus {
+    border-color: #4a5568;
+}
+
+button {
+    font-size: 1em;
+    padding: 10px 20px;
+    margin: 10px 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    color: white;
+}
+
+#submit-btn {
+    background-color: #3182ce; /* Blue for submit button */
+}
+
+#submit-btn:hover {
+    background-color: #2b6cb0;
+}
+
+#restart-btn {
+    background-color: #e53e3e; /* Red for restart button */
+    display: none;
+}
+
+#restart-btn:hover {
+    background-color: #c53030;
 }
