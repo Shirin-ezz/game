@@ -1,29 +1,22 @@
-// Game status object to store game-related data
-const gameStatus = {
-    words: [
-        "apple", "grape", "pearl", "pride", "drive", "stone", "smart", "bread", "flame", 
-        "globe", "crown", "proud", "swift", "trace", "shine", "blaze", "dream", "light",
-        "charm", "roast", "sneak", "climb", "grasp", "frame", "flock", "bloom", "craze", 
-        "flint", "burst", "slice"
-    ],
-    answer: "",
-    attempts: 0,
-    maxAttempts: 6,
-};
 
-// Initialize the game by setting a random word as the answer
-function initializeGame() {
-    gameStatus.answer = gameStatus.words[Math.floor(Math.random() * gameStatus.words.length)];
-    gameStatus.attempts = 0;
-    createBoard();
-    document.getElementById('restart-btn').style.display = 'none';
-}
+// Define the array of at least 30 five-letter words
+const words = [
+    "apple", "grape", "pearl", "pride", "drive", "stone", "smart", "bread", "flame", 
+    "globe", "crown", "proud", "swift", "trace", "shine", "blaze", "dream", "light",
+    "charm", "roast", "sneak", "climb", "grasp", "frame", "flock", "bloom", "craze", 
+    "flint", "burst", "slice"
+];
+
+// Randomly select a word from the array as the answer
+let answer = words[Math.floor(Math.random() * words.length)];
+let attempts = 0;
+const maxAttempts = 6;
 
 // Generate the game board
 function createBoard() {
     const gameBoard = document.getElementById('game-board');
     gameBoard.innerHTML = '';  // Clear the board before creating a new one
-    for (let i = 0; i < gameStatus.maxAttempts; i++) {
+    for (let i = 0; i < maxAttempts; i++) {
         for (let j = 0; j < 5; j++) {
             const box = document.createElement('div');
             box.classList.add('letter-box');
@@ -40,7 +33,7 @@ async function isValidWord(guess) {
     return data.length > 0;  // Returns true if the API returns a result, meaning it's a valid word
 }
 
-// Handle the guess submission using .forEach
+// Handle the guess submission
 async function submitGuess() {
     const input = document.getElementById('guess-input');
     const guess = input.value.toLowerCase();
@@ -59,27 +52,27 @@ async function submitGuess() {
     }
 
     // Evaluate the guess against the correct word
-    guess.split('').forEach((letter, index) => {
-        const box = document.getElementById(`box-${gameStatus.attempts}-${index}`);
-        box.textContent = letter;
+    for (let i = 0; i < 5; i++) {
+        const box = document.getElementById(`box-${attempts}-${i}`);
+        box.textContent = guess[i];
 
-        if (letter === gameStatus.answer[index]) {
+        if (guess[i] === answer[i]) {
             box.classList.add('correct');
-        } else if (gameStatus.answer.includes(letter)) {
+        } else if (answer.includes(guess[i])) {
             box.classList.add('wrong-place');
         } else {
             box.classList.add('wrong');
         }
-    });
+    }
 
-    gameStatus.attempts++;
+    attempts++;
 
     // Check if the player has guessed the word or used all attempts
-    if (guess === gameStatus.answer) {
+    if (guess === answer) {
         alert('Congratulations! You guessed the word.');
         document.getElementById('restart-btn').style.display = 'block';  // Show restart button
-    } else if (gameStatus.attempts === gameStatus.maxAttempts) {
-        alert(`Game over! The word was ${gameStatus.answer}.`);
+    } else if (attempts === maxAttempts) {
+        alert(`Game over! The word was ${answer}.`);
         document.getElementById('restart-btn').style.display = 'block';  // Show restart button
     }
 
@@ -88,7 +81,10 @@ async function submitGuess() {
 
 // Restart the game
 function restartGame() {
-    initializeGame();
+    attempts = 0;
+    answer = words[Math.floor(Math.random() * words.length)];  // Pick a new random word
+    createBoard();  // Re-create the board for the new game
+    document.getElementById('restart-btn').style.display = 'none';  // Hide restart button
 }
 
 // Event listeners
@@ -96,4 +92,4 @@ document.getElementById('submit-btn').addEventListener('click', submitGuess);
 document.getElementById('restart-btn').addEventListener('click', restartGame);
 
 // Initialize the game board on page load
-window.onload = initializeGame;
+window.onload = createBoard;
