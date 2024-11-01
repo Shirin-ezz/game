@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,18 +8,14 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Wordle Game</h1>
-        <table id="game-board">
-            <!-- Table rows and cells will be generated dynamically in JavaScript -->
-        </table>
-        <div id="used-letter-board" class="used-letters"></div>
-        <div class="controls">
-            <input type="text" id="guess-input" maxlength="5" placeholder="Enter your guess">
-            <button id="submit-btn">Submit Guess</button>
-            <button id="restart-btn" style="display: none;">Restart Game</button>
-        </div>
+    <h1>Wordle Game</h1>
+    <div id="game-board">
+        <!-- The game board will be created dynamically here -->
     </div>
+    <input type="text" id="guess-input" maxlength="5" placeholder="Enter your guess">
+    <button id="submit-btn">Submit Guess</button>
+    <button id="restart-btn" style="display: none;">Restart Game</button>
+
     <script src="script.js"></script>
 </body>
 </html>
