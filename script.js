@@ -15,21 +15,23 @@ const gameStatus = {
 function initializeGame() {
     gameStatus.answer = gameStatus.words[Math.floor(Math.random() * gameStatus.words.length)];
     gameStatus.attempts = 0;
-    createBoard();
+    createBoard(); // Create the full table at the start
     document.getElementById('restart-btn').style.display = 'none';
 }
 
-// Generate the game board
+// Generate the game board as a table with all rows and columns visible at the start
 function createBoard() {
     const gameBoard = document.getElementById('game-board');
     gameBoard.innerHTML = '';  // Clear the board before creating a new one
     for (let i = 0; i < gameStatus.maxAttempts; i++) {
+        const row = document.createElement('tr');
         for (let j = 0; j < 5; j++) {
-            const box = document.createElement('div');
-            box.classList.add('letter-box');
-            box.id = `box-${i}-${j}`;
-            gameBoard.appendChild(box);
+            const cell = document.createElement('td');
+            cell.id = `cell-${i}-${j}`;
+            cell.classList.add('letter-box'); // Ensure styling is applied to each cell
+            row.appendChild(cell);
         }
+        gameBoard.appendChild(row);
     }
 }
 
@@ -40,7 +42,7 @@ async function isValidWord(guess) {
     return data.length > 0;  // Returns true if the API returns a result, meaning it's a valid word
 }
 
-// Handle the guess submission using .forEach
+// Handle the guess submission
 async function submitGuess() {
     const input = document.getElementById('guess-input');
     const guess = input.value.toLowerCase();
@@ -60,15 +62,15 @@ async function submitGuess() {
 
     // Evaluate the guess against the correct word
     guess.split('').forEach((letter, index) => {
-        const box = document.getElementById(`box-${gameStatus.attempts}-${index}`);
-        box.textContent = letter;
+        const cell = document.getElementById(`cell-${gameStatus.attempts}-${index}`);
+        cell.textContent = letter;
 
         if (letter === gameStatus.answer[index]) {
-            box.classList.add('correct');
+            cell.classList.add('correct');
         } else if (gameStatus.answer.includes(letter)) {
-            box.classList.add('wrong-place');
+            cell.classList.add('wrong-place');
         } else {
-            box.classList.add('wrong');
+            cell.classList.add('wrong');
         }
     });
 
