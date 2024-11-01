@@ -15,7 +15,7 @@ h1 {
 /* Game board styles */
 #game-board {
     margin: 0 auto;
-    border-collapse: collapse; /* Ensures no space between table cells */
+    border-collapse: collapse;
     margin-bottom: 20px;
 }
 
@@ -26,9 +26,9 @@ h1 {
     font-weight: bold;
     text-align: center;
     vertical-align: middle;
-    border: 2px solid #333; /* Adds a bold border around each cell */
+    border: 2px solid #333;
     color: #1a202c;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    transition: background-color 0.3s ease;
 }
 
 /* Colors for letter states */
