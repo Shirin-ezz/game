@@ -1,3 +1,4 @@
+
 const gameStatus = {
     words: [
         "apple", "grape", "pearl", "pride", "drive", "stone", "smart", "bread", "flame", 
@@ -10,21 +11,17 @@ const gameStatus = {
     maxAttempts: 6,
 };
 
-const usedLetters = {}; // Track letters that have been guessed
-
-// Arrow function to initialize the game
 const initializeGame = () => {
     gameStatus.answer = gameStatus.words[Math.floor(Math.random() * gameStatus.words.length)];
     gameStatus.attempts = 0;
     createBoard();
     document.getElementById('restart-btn').style.display = 'none';
-    console.log("Answer:", gameStatus.answer); // Display answer in console for debugging
+    console.log("Answer:", gameStatus.answer);
 };
 
-// Function to create game board
 const createBoard = () => {
     const gameBoard = document.getElementById('game-board');
-    gameBoard.innerHTML = '';  // Clear the board
+    gameBoard.innerHTML = '';
 
     for (let i = 0; i < gameStatus.maxAttempts; i++) {
         const row = document.createElement('tr');
@@ -37,10 +34,11 @@ const createBoard = () => {
         gameBoard.appendChild(row);
     }
 
-    renderUsedLetterBoard(); // Initialize the letter board
+    renderUsedLetterBoard();
 };
 
-// Function to handle user input
+const usedLetters = {};
+
 const submitGuess = async () => {
     const input = document.getElementById('guess-input');
     const guess = input.value.toLowerCase();
@@ -50,7 +48,6 @@ const submitGuess = async () => {
         return;
     }
 
-    // Use an API to check if the word is valid
     const response = await fetch(`https://api.datamuse.com/words?sp=${guess}&max=1`);
     const data = await response.json();
     if (data.length === 0) {
@@ -71,7 +68,7 @@ const submitGuess = async () => {
         }
     });
 
-    updateUsedLetterBoard(guess); // Update the used letter board
+    updateUsedLetterBoard(guess);
     gameStatus.attempts++;
 
     if (guess === gameStatus.answer) {
@@ -85,7 +82,6 @@ const submitGuess = async () => {
     input.value = '';
 };
 
-// Update the used letter board
 const updateUsedLetterBoard = (guess) => {
     guess.split('').forEach((letter, index) => {
         if (!usedLetters[letter]) {
@@ -104,7 +100,6 @@ const updateUsedLetterBoard = (guess) => {
     renderUsedLetterBoard();
 };
 
-// Render the used letter board
 const renderUsedLetterBoard = () => {
     const board = document.getElementById('used-letter-board');
     board.innerHTML = '';
@@ -126,12 +121,9 @@ const renderUsedLetterBoard = () => {
     });
 };
 
-// Restart the game
 const restartGame = () => initializeGame();
 
-// Event listeners
 document.getElementById('submit-btn').addEventListener('click', submitGuess);
 document.getElementById('restart-btn').addEventListener('click', restartGame);
 
-// Initialize the game board on page load
 window.onload = initializeGame;
