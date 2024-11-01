@@ -1,41 +1,87 @@
-
+/* General styles */
 body {
     font-family: Arial, sans-serif;
     text-align: center;
     margin-top: 50px;
+    color: #333;
 }
 
+h1 {
+    font-size: 2.5em;
+    color: #4a5568;
+    margin-bottom: 20px;
+}
+
+/* Game board styles */
 #game-board {
-    display: grid;
-    grid-template-columns: repeat(5, 50px);
-    grid-gap: 5px;
-    justify-content: center;
+    margin: 0 auto;
+    border-collapse: separate;
+    border-spacing: 10px;
     margin-bottom: 20px;
 }
 
 .letter-box {
-    width: 50px;
-    height: 50px;
-    border: 2px solid black;
-    font-size: 24px;
+    width: 60px;
+    height: 60px;
+    font-size: 1.5em;
+    font-weight: bold;
     text-align: center;
-    line-height: 50px;
+    vertical-align: middle;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    color: #1a202c;
+    border: 1px solid #cbd5e0;
 }
 
 .correct {
-    background-color: green;
+    background-color: #48bb78; /* Green for correct letters */
+    color: white;
 }
 
 .wrong-place {
-    background-color: gold;
+    background-color: #ecc94b; /* Yellow for misplaced letters */
+    color: white;
 }
 
 .wrong {
-    background-color: gray;
+    background-color: #a0aec0; /* Gray for incorrect letters */
+    color: white;
 }
 
-input, button {
-    font-size: 18px;
+/* Input and button styles */
+input#guess-input {
+    font-size: 1.2em;
     padding: 10px;
-    margin: 5px;
+    margin: 10px 5px;
+    width: 150px;
+    border: 2px solid #cbd5e0;
+    border-radius: 5px;
+    outline: none;
+}
+
+button {
+    font-size: 1em;
+    padding: 10px 20px;
+    margin: 10px 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: white;
+}
+
+#submit-btn {
+    background-color: #3182ce;
+}
+
+#submit-btn:hover {
+    background-color: #2b6cb0;
+}
+
+#restart-btn {
+    background-color: #e53e3e;
+    display: none;
+}
+
+#restart-btn:hover {
+    background-color: #c53030;
 }
