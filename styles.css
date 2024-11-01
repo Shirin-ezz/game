@@ -17,18 +17,18 @@ body, html {
 
 .container {
     text-align: center;
-    padding: 30px;
+    padding: 20px;
     max-width: 400px;
     background-color: #ffffff;
     border-radius: 15px;
-    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.15);
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
 }
 
 /* Heading style */
 h1 {
-    font-size: 2.2em;
+    font-size: 2.5em;
     color: #333333;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
     font-weight: bold;
 }
 
@@ -37,7 +37,7 @@ h1 {
     margin: 0 auto;
     border-collapse: separate;
     border-spacing: 10px;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
 }
 
 #game-board td {
@@ -50,23 +50,23 @@ h1 {
     border-radius: 8px;
     background-color: #e0e0e0;
     color: #495057;
-    transition: background-color 0.3s ease, transform 0.2s ease, border-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* Colors for letter states */
 .correct {
-    background-color: #28a745; /* Soft green for correct letters */
+    background-color: #28a745;
     color: white;
 }
 
 .wrong-place {
-    background-color: #ffc107; /* Soft yellow for misplaced letters */
+    background-color: #ffc107;
     color: white;
 }
 
 .wrong {
-    background-color: #6c757d; /* Soft gray for incorrect letters */
+    background-color: #6c757d;
     color: white;
 }
 
@@ -75,7 +75,7 @@ h1 {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
 }
 
 .used-letters .letter {
@@ -102,7 +102,7 @@ h1 {
 input#guess-input {
     font-size: 1.1em;
     padding: 12px;
-    width: 150px;
+    width: 160px;
     border: 1px solid #ced4da;
     border-radius: 8px;
     outline: none;
