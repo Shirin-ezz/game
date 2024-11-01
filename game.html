@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wordle Game</title>
-    <link rel="stylesheet" href="styles.css?v=3.0">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
@@ -12,12 +12,13 @@
         <table id="game-board">
             <!-- Table rows and cells will be generated dynamically in JavaScript -->
         </table>
+        <div id="used-letter-board" class="used-letters"></div>
         <div class="controls">
             <input type="text" id="guess-input" maxlength="5" placeholder="Enter your guess">
             <button id="submit-btn">Submit Guess</button>
             <button id="restart-btn" style="display: none;">Restart Game</button>
         </div>
     </div>
-    <script src="script.js?v=3.0"></script>
+    <script src="script.js"></script>
 </body>
 </html>
