@@ -1,21 +1,21 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wordle Game</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=1.0"> <!-- Version parameter added here -->
 </head>
 <body>
-    <h1>Wordle Game</h1>
-    <div id="game-board">
-        <!-- The game board will be created dynamically here -->
+    <div class="container">
+        <h1>Wordle Game</h1>
+        <table id="game-board">
+            <!-- Table rows and cells will be generated dynamically in JavaScript -->
+        </table>
+        <input type="text" id="guess-input" maxlength="5" placeholder="Enter your guess">
+        <button id="submit-btn">Submit Guess</button>
+        <button id="restart-btn" style="display: none;">Restart Game</button>
     </div>
-    <input type="text" id="guess-input" maxlength="5" placeholder="Enter your guess">
-    <button id="submit-btn">Submit Guess</button>
-    <button id="restart-btn" style="display: none;">Restart Game</button>
-
-    <script src="script.js"></script>
+    <script src="script.js?v=1.0"></script> <!-- Version parameter added here -->
 </body>
 </html>
