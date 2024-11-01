@@ -15,46 +15,45 @@ h1 {
 
 /* Game board styles */
 #game-board {
-    display: grid;
-    grid-template-columns: repeat(5, 60px);
-    grid-gap: 10px;
-    justify-content: center;
+    margin: 0 auto;
+    border-collapse: separate;
+    border-spacing: 10px;
     margin-bottom: 20px;
-    padding: 10px;
     background-color: #e2e8f0;
     border-radius: 8px;
+    padding: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.letter-box {
+#game-board td {
     width: 60px;
     height: 60px;
     font-size: 1.5em;
     font-weight: bold;
     text-align: center;
-    line-height: 60px;
+    vertical-align: middle;
     border-radius: 8px;
     transition: background-color 0.3s ease, transform 0.2s ease;
     color: #1a202c;
 }
 
-.letter-box.correct {
+.correct {
     background-color: #48bb78; /* Green for correct letters */
     color: white;
 }
 
-.letter-box.wrong-place {
+.wrong-place {
     background-color: #ecc94b; /* Yellow for misplaced letters */
     color: white;
 }
 
-.letter-box.wrong {
+.wrong {
     background-color: #a0aec0; /* Gray for incorrect letters */
     color: white;
 }
 
-/* Hover effect for letter boxes */
-.letter-box:hover {
+/* Hover effect for letter cells */
+#game-board td:hover {
     transform: scale(1.05);
 }
 
