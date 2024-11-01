@@ -1,41 +1,118 @@
-
-body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    margin-top: 50px;
+/* Basic reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-#game-board {
-    display: grid;
-    grid-template-columns: repeat(5, 50px);
-    grid-gap: 5px;
+/* Centering container */
+body, html {
+    height: 100%;
+    display: flex;
     justify-content: center;
+    align-items: center;
+    background-color: #f0f2f5;
+    font-family: 'Arial', sans-serif;
+}
+
+.container {
+    text-align: center;
+    padding: 20px;
+    max-width: 320px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* Heading style */
+h1 {
+    font-size: 2em;
+    color: #333333;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+/* Game board styles */
+#game-board {
+    margin: 0 auto;
+    border-collapse: collapse;
+    border-spacing: 8px;
     margin-bottom: 20px;
 }
 
-.letter-box {
+#game-board td {
     width: 50px;
     height: 50px;
-    border: 2px solid black;
-    font-size: 24px;
+    font-size: 1.5em;
+    font-weight: bold;
     text-align: center;
-    line-height: 50px;
+    vertical-align: middle;
+    border-radius: 6px;
+    background-color: #e9ecef;
+    color: #495057;
+    transition: background-color 0.3s ease, transform 0.2s ease, border-color 0.3s ease;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
 }
 
+/* Colors for letter states */
 .correct {
-    background-color: green;
+    background-color: #28a745; /* Soft green for correct letters */
+    color: white;
 }
 
 .wrong-place {
-    background-color: gold;
+    background-color: #ffc107; /* Soft yellow for misplaced letters */
+    color: white;
 }
 
 .wrong {
-    background-color: gray;
+    background-color: #6c757d; /* Soft gray for incorrect letters */
+    color: white;
 }
 
-input, button {
-    font-size: 18px;
+/* Input and button styling */
+.controls {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+input#guess-input {
+    font-size: 1em;
     padding: 10px;
-    margin: 5px;
+    width: 140px;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    outline: none;
+    background-color: #f8f9fa;
+    color: #495057;
+    transition: border-color 0.3s ease;
+}
+
+input#guess-input:focus {
+    border-color: #007bff;
+}
+
+button {
+    font-size: 1em;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#restart-btn {
+    background-color: #dc3545;
+}
+
+#restart-btn:hover {
+    background-color: #c82333;
 }
