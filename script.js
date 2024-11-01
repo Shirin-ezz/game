@@ -1,3 +1,4 @@
+// JavaScript game logic for Wordle
 
 const gameStatus = {
     words: [
@@ -48,6 +49,7 @@ const submitGuess = async () => {
         return;
     }
 
+    // Verify if the guess is a valid word using an API
     const response = await fetch(`https://api.datamuse.com/words?sp=${guess}&max=1`);
     const data = await response.json();
     if (data.length === 0) {
@@ -59,12 +61,16 @@ const submitGuess = async () => {
         const cell = document.getElementById(`cell-${gameStatus.attempts}-${index}`);
         cell.textContent = letter;
 
+        // Clear existing classes
+        cell.classList.remove('correct', 'wrong-place', 'wrong');
+
+        // Apply the correct class
         if (letter === gameStatus.answer[index]) {
-            cell.classList.add('correct');
+            cell.classList.add('correct');  // Adds green color
         } else if (gameStatus.answer.includes(letter)) {
-            cell.classList.add('wrong-place');
+            cell.classList.add('wrong-place');  // Adds yellow color
         } else {
-            cell.classList.add('wrong');
+            cell.classList.add('wrong');  // Adds gray color
         }
     });
 
