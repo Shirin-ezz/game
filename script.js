@@ -10,6 +10,8 @@ const gameStatus = {
     maxAttempts: 6,
 };
 
+const usedLetters = {}; // Track letters that have been guessed
+
 // Arrow function to initialize the game
 const initializeGame = () => {
     gameStatus.answer = gameStatus.words[Math.floor(Math.random() * gameStatus.words.length)];
@@ -34,6 +36,8 @@ const createBoard = () => {
         }
         gameBoard.appendChild(row);
     }
+
+    renderUsedLetterBoard(); // Initialize the letter board
 };
 
 // Function to handle user input
@@ -67,6 +71,7 @@ const submitGuess = async () => {
         }
     });
 
+    updateUsedLetterBoard(guess); // Update the used letter board
     gameStatus.attempts++;
 
     if (guess === gameStatus.answer) {
@@ -80,7 +85,48 @@ const submitGuess = async () => {
     input.value = '';
 };
 
-// Function to restart the game
+// Update the used letter board
+const updateUsedLetterBoard = (guess) => {
+    guess.split('').forEach((letter, index) => {
+        if (!usedLetters[letter]) {
+            usedLetters[letter] = { correct: false, wrongPlace: false };
+        }
+
+        if (letter === gameStatus.answer[index]) {
+            usedLetters[letter].correct = true;
+        } else if (gameStatus.answer.includes(letter)) {
+            usedLetters[letter].wrongPlace = true;
+        } else {
+            usedLetters[letter].wrong = true;
+        }
+    });
+
+    renderUsedLetterBoard();
+};
+
+// Render the used letter board
+const renderUsedLetterBoard = () => {
+    const board = document.getElementById('used-letter-board');
+    board.innerHTML = '';
+
+    Object.keys(usedLetters).forEach((letter) => {
+        const letterDiv = document.createElement('div');
+        letterDiv.classList.add('letter');
+        letterDiv.textContent = letter;
+
+        if (usedLetters[letter].correct) {
+            letterDiv.classList.add('correct');
+        } else if (usedLetters[letter].wrongPlace) {
+            letterDiv.classList.add('wrong-place');
+        } else {
+            letterDiv.classList.add('wrong');
+        }
+
+        board.appendChild(letterDiv);
+    });
+};
+
+// Restart the game
 const restartGame = () => initializeGame();
 
 // Event listeners
