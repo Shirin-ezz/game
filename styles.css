@@ -17,41 +17,41 @@ body, html {
 
 .container {
     text-align: center;
-    padding: 20px;
-    max-width: 350px;
+    padding: 30px;
+    max-width: 400px;
     background-color: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.15);
 }
 
 /* Heading style */
 h1 {
-    font-size: 2em;
+    font-size: 2.2em;
     color: #333333;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     font-weight: bold;
 }
 
 /* Game board styles */
 #game-board {
     margin: 0 auto;
-    border-collapse: collapse;
-    border-spacing: 8px;
-    margin-bottom: 20px;
+    border-collapse: separate;
+    border-spacing: 10px;
+    margin-bottom: 25px;
 }
 
 #game-board td {
-    width: 50px;
-    height: 50px;
-    font-size: 1.5em;
+    width: 60px;
+    height: 60px;
+    font-size: 2em;
     font-weight: bold;
     text-align: center;
     vertical-align: middle;
-    border-radius: 6px;
-    background-color: #e9ecef;
+    border-radius: 8px;
+    background-color: #e0e0e0;
     color: #495057;
     transition: background-color 0.3s ease, transform 0.2s ease, border-color 0.3s ease;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* Colors for letter states */
@@ -74,36 +74,37 @@ h1 {
 .used-letters {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 20px;
+    gap: 10px;
+    margin-bottom: 25px;
 }
 
 .used-letters .letter {
-    width: 30px;
-    height: 30px;
-    font-size: 1.2em;
+    width: 35px;
+    height: 35px;
+    font-size: 1.3em;
     font-weight: bold;
     text-align: center;
-    line-height: 30px;
-    border-radius: 4px;
+    line-height: 35px;
+    border-radius: 5px;
     background-color: #e9ecef;
     color: #333;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 /* Input and button styling */
 .controls {
     display: flex;
     justify-content: center;
-    gap: 10px;
-    margin-top: 15px;
+    gap: 15px;
+    margin-top: 20px;
 }
 
 input#guess-input {
-    font-size: 1em;
-    padding: 10px;
-    width: 140px;
+    font-size: 1.1em;
+    padding: 12px;
+    width: 150px;
     border: 1px solid #ced4da;
-    border-radius: 6px;
+    border-radius: 8px;
     outline: none;
     background-color: #f8f9fa;
     color: #495057;
@@ -115,10 +116,10 @@ input#guess-input:focus {
 }
 
 button {
-    font-size: 1em;
-    padding: 10px 15px;
+    font-size: 1.1em;
+    padding: 12px 20px;
     border: none;
-    border-radius: 6px;
+    border-radius: 8px;
     cursor: pointer;
     background-color: #007bff;
     color: white;
