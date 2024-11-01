@@ -34,11 +34,7 @@ const createBoard = () => {
         }
         gameBoard.appendChild(row);
     }
-
-    renderUsedLetterBoard();
 };
-
-const usedLetters = {};
 
 const submitGuess = async () => {
     const input = document.getElementById('guess-input');
@@ -57,24 +53,24 @@ const submitGuess = async () => {
         return;
     }
 
+    // Process each letter of the guess and apply appropriate styles
     guess.split('').forEach((letter, index) => {
         const cell = document.getElementById(`cell-${gameStatus.attempts}-${index}`);
         cell.textContent = letter;
 
-        // Clear existing classes
+        // Clear existing classes before adding the new class
         cell.classList.remove('correct', 'wrong-place', 'wrong');
 
-        // Apply the correct class
+        // Apply the correct class based on letter correctness
         if (letter === gameStatus.answer[index]) {
-            cell.classList.add('correct');  // Adds green color
+            cell.classList.add('correct');  // Correct position - green
         } else if (gameStatus.answer.includes(letter)) {
-            cell.classList.add('wrong-place');  // Adds yellow color
+            cell.classList.add('wrong-place');  // Wrong position - yellow
         } else {
-            cell.classList.add('wrong');  // Adds gray color
+            cell.classList.add('wrong');  // Not in the word - gray
         }
     });
 
-    updateUsedLetterBoard(guess);
     gameStatus.attempts++;
 
     if (guess === gameStatus.answer) {
@@ -86,45 +82,6 @@ const submitGuess = async () => {
     }
 
     input.value = '';
-};
-
-const updateUsedLetterBoard = (guess) => {
-    guess.split('').forEach((letter, index) => {
-        if (!usedLetters[letter]) {
-            usedLetters[letter] = { correct: false, wrongPlace: false };
-        }
-
-        if (letter === gameStatus.answer[index]) {
-            usedLetters[letter].correct = true;
-        } else if (gameStatus.answer.includes(letter)) {
-            usedLetters[letter].wrongPlace = true;
-        } else {
-            usedLetters[letter].wrong = true;
-        }
-    });
-
-    renderUsedLetterBoard();
-};
-
-const renderUsedLetterBoard = () => {
-    const board = document.getElementById('used-letter-board');
-    board.innerHTML = '';
-
-    Object.keys(usedLetters).forEach((letter) => {
-        const letterDiv = document.createElement('div');
-        letterDiv.classList.add('letter');
-        letterDiv.textContent = letter;
-
-        if (usedLetters[letter].correct) {
-            letterDiv.classList.add('correct');
-        } else if (usedLetters[letter].wrongPlace) {
-            letterDiv.classList.add('wrong-place');
-        } else {
-            letterDiv.classList.add('wrong');
-        }
-
-        board.appendChild(letterDiv);
-    });
 };
 
 const restartGame = () => initializeGame();
