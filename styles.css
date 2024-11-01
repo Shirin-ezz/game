@@ -18,7 +18,7 @@ body, html {
 .container {
     text-align: center;
     padding: 20px;
-    max-width: 320px;
+    max-width: 350px;
     background-color: #ffffff;
     border-radius: 12px;
     box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
@@ -68,6 +68,26 @@ h1 {
 .wrong {
     background-color: #6c757d; /* Soft gray for incorrect letters */
     color: white;
+}
+
+/* Used letter board styles */
+.used-letters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.used-letters .letter {
+    width: 30px;
+    height: 30px;
+    font-size: 1.2em;
+    font-weight: bold;
+    text-align: center;
+    line-height: 30px;
+    border-radius: 4px;
+    background-color: #e9ecef;
+    color: #333;
 }
 
 /* Input and button styling */
