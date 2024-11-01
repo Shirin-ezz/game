@@ -1,89 +1,41 @@
-/* General styles */
+
 body {
     font-family: Arial, sans-serif;
     text-align: center;
     margin-top: 50px;
-    color: #333;
 }
 
-h1 {
-    font-size: 2.5em;
-    color: #4a5568;
-    margin-bottom: 20px;
-}
-
-/* Game board styles */
 #game-board {
-    margin: 0 auto;
-    border-collapse: collapse;
+    display: grid;
+    grid-template-columns: repeat(5, 50px);
+    grid-gap: 5px;
+    justify-content: center;
     margin-bottom: 20px;
 }
 
-#game-board td {
-    width: 60px;
-    height: 60px;
-    font-size: 1.5em;
-    font-weight: bold;
+.letter-box {
+    width: 50px;
+    height: 50px;
+    border: 2px solid black;
+    font-size: 24px;
     text-align: center;
-    vertical-align: middle;
-    border: 2px solid #333;
-    color: #1a202c;
-    transition: background-color 0.3s ease;
+    line-height: 50px;
 }
 
-/* Colors for letter states */
 .correct {
-    background-color: #6aaa64; /* Green for correct letters */
-    color: white;
+    background-color: green;
 }
 
 .wrong-place {
-    background-color: #c9b458; /* Yellow for misplaced letters */
-    color: white;
+    background-color: gold;
 }
 
 .wrong {
-    background-color: #787c7e; /* Gray for incorrect letters */
-    color: white;
+    background-color: gray;
 }
 
-/* Input and button styles */
-input#guess-input {
-    font-size: 1.2em;
+input, button {
+    font-size: 18px;
     padding: 10px;
-    margin: 10px 5px;
-    width: 150px;
-    border: 2px solid #cbd5e0;
-    border-radius: 5px;
-    outline: none;
-}
-
-button {
-    font-size: 1em;
-    padding: 10px 20px;
-    margin: 10px 5px;
-    border: 2px solid #cbd5e0;
-    border-radius: 5px;
-    cursor: pointer;
-    background-color: #007bff;
-    color: white;
-    transition: background-color 0.3s ease;
-}
-
-button:hover {
-    background-color: #0056b3;
-}
-
-#submit-btn {
-    border: 2px solid #007bff;
-}
-
-#restart-btn {
-    background-color: #dc3545;
-    border: 2px solid #dc3545;
-    display: none;
-}
-
-#restart-btn:hover {
-    background-color: #b02a37;
+    margin: 5px;
 }
