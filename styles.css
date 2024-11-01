@@ -56,39 +56,18 @@ h1 {
 
 /* Colors for letter states */
 .correct {
-    background-color: #28a745;
+    background-color: #28a745;  /* Green for correct letters in the correct position */
     color: white;
 }
 
 .wrong-place {
-    background-color: #ffc107;
+    background-color: #ffc107;  /* Yellow for correct letters in the wrong position */
     color: white;
 }
 
 .wrong {
-    background-color: #6c757d;
+    background-color: #6c757d;  /* Gray for letters not in the word */
     color: white;
-}
-
-/* Used letter board styles */
-.used-letters {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 20px;
-}
-
-.used-letters .letter {
-    width: 35px;
-    height: 35px;
-    font-size: 1.3em;
-    font-weight: bold;
-    text-align: center;
-    line-height: 35px;
-    border-radius: 5px;
-    background-color: #e9ecef;
-    color: #333;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 /* Input and button styling */
