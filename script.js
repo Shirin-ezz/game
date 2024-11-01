@@ -1,92 +1,95 @@
-// JavaScript game logic for Wordle
 
-const gameStatus = {
-    words: [
-        "apple", "grape", "pearl", "pride", "drive", "stone", "smart", "bread", "flame", 
-        "globe", "crown", "proud", "swift", "trace", "shine", "blaze", "dream", "light",
-        "charm", "roast", "sneak", "climb", "grasp", "frame", "flock", "bloom", "craze", 
-        "flint", "burst", "slice"
-    ],
-    answer: "",
-    attempts: 0,
-    maxAttempts: 6,
-};
+// Define the array of at least 30 five-letter words
+const words = [
+    "apple", "grape", "pearl", "pride", "drive", "stone", "smart", "bread", "flame", 
+    "globe", "crown", "proud", "swift", "trace", "shine", "blaze", "dream", "light",
+    "charm", "roast", "sneak", "climb", "grasp", "frame", "flock", "bloom", "craze", 
+    "flint", "burst", "slice"
+];
 
-const initializeGame = () => {
-    gameStatus.answer = gameStatus.words[Math.floor(Math.random() * gameStatus.words.length)];
-    gameStatus.attempts = 0;
-    createBoard();
-    document.getElementById('restart-btn').style.display = 'none';
-    console.log("Answer:", gameStatus.answer);
-};
+// Randomly select a word from the array as the answer
+let answer = words[Math.floor(Math.random() * words.length)];
+let attempts = 0;
+const maxAttempts = 6;
 
-const createBoard = () => {
+// Generate the game board
+function createBoard() {
     const gameBoard = document.getElementById('game-board');
-    gameBoard.innerHTML = '';
-
-    for (let i = 0; i < gameStatus.maxAttempts; i++) {
-        const row = document.createElement('tr');
+    gameBoard.innerHTML = '';  // Clear the board before creating a new one
+    for (let i = 0; i < maxAttempts; i++) {
         for (let j = 0; j < 5; j++) {
-            const cell = document.createElement('td');
-            cell.id = `cell-${i}-${j}`;
-            cell.classList.add('letter-box');
-            row.appendChild(cell);
+            const box = document.createElement('div');
+            box.classList.add('letter-box');
+            box.id = `box-${i}-${j}`;
+            gameBoard.appendChild(box);
         }
-        gameBoard.appendChild(row);
     }
-};
+}
 
-const submitGuess = async () => {
+// API function to check if a word is valid using Datamuse API
+async function isValidWord(guess) {
+    const response = await fetch(`https://api.datamuse.com/words?sp=${guess}&max=1`);
+    const data = await response.json();
+    return data.length > 0;  // Returns true if the API returns a result, meaning it's a valid word
+}
+
+// Handle the guess submission
+async function submitGuess() {
     const input = document.getElementById('guess-input');
     const guess = input.value.toLowerCase();
 
+    // Check if the word is exactly 5 letters
     if (guess.length !== 5) {
         alert('Invalid guess! Please enter a 5-letter word.');
         return;
     }
 
-    // Verify if the guess is a valid word using an API
-    const response = await fetch(`https://api.datamuse.com/words?sp=${guess}&max=1`);
-    const data = await response.json();
-    if (data.length === 0) {
+    // Use the API to check if the word is valid
+    const valid = await isValidWord(guess);
+    if (!valid) {
         alert('Invalid guess! Please enter a valid word.');
         return;
     }
 
-    // Process each letter of the guess and apply appropriate styles
-    guess.split('').forEach((letter, index) => {
-        const cell = document.getElementById(`cell-${gameStatus.attempts}-${index}`);
-        cell.textContent = letter;
+    // Evaluate the guess against the correct word
+    for (let i = 0; i < 5; i++) {
+        const box = document.getElementById(`box-${attempts}-${i}`);
+        box.textContent = guess[i];
 
-        // Clear existing classes before adding the new class
-        cell.classList.remove('correct', 'wrong-place', 'wrong');
-
-        // Apply the correct class based on letter correctness
-        if (letter === gameStatus.answer[index]) {
-            cell.classList.add('correct');  // Correct position - green
-        } else if (gameStatus.answer.includes(letter)) {
-            cell.classList.add('wrong-place');  // Wrong position - yellow
+        if (guess[i] === answer[i]) {
+            box.classList.add('correct');
+        } else if (answer.includes(guess[i])) {
+            box.classList.add('wrong-place');
         } else {
-            cell.classList.add('wrong');  // Not in the word - gray
+            box.classList.add('wrong');
         }
-    });
-
-    gameStatus.attempts++;
-
-    if (guess === gameStatus.answer) {
-        alert('Congratulations! You guessed the word.');
-        document.getElementById('restart-btn').style.display = 'block';
-    } else if (gameStatus.attempts === gameStatus.maxAttempts) {
-        alert(`Game over! The word was ${gameStatus.answer}.`);
-        document.getElementById('restart-btn').style.display = 'block';
     }
 
-    input.value = '';
-};
+    attempts++;
 
-const restartGame = () => initializeGame();
+    // Check if the player has guessed the word or used all attempts
+    if (guess === answer) {
+        alert('Congratulations! You guessed the word.');
+        document.getElementById('restart-btn').style.display = 'block';  // Show restart button
+    } else if (attempts === maxAttempts) {
+        alert(`Game over! The word was ${answer}.`);
+        document.getElementById('restart-btn').style.display = 'block';  // Show restart button
+    }
 
+    input.value = '';  // Clear input for the next guess
+}
+
+// Restart the game
+function restartGame() {
+    attempts = 0;
+    answer = words[Math.floor(Math.random() * words.length)];  // Pick a new random word
+    createBoard();  // Re-create the board for the new game
+    document.getElementById('restart-btn').style.display = 'none';  // Hide restart button
+}
+
+// Event listeners
 document.getElementById('submit-btn').addEventListener('click', submitGuess);
 document.getElementById('restart-btn').addEventListener('click', restartGame);
 
-window.onload = initializeGame;
+// Initialize the game board on page load
+window.onload = createBoard;
