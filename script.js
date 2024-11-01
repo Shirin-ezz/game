@@ -23,15 +23,16 @@ function initializeGame() {
 function createBoard() {
     const gameBoard = document.getElementById('game-board');
     gameBoard.innerHTML = '';  // Clear the board before creating a new one
+
     for (let i = 0; i < gameStatus.maxAttempts; i++) {
-        const row = document.createElement('tr');
-        for (let j = 0; j < 5; j++) {
+        const row = document.createElement('tr'); // Create a row for each attempt
+        for (let j = 0; j < 5; j++) { // Each row has 5 cells for letters
             const cell = document.createElement('td');
-            cell.id = `cell-${i}-${j}`;
+            cell.id = `cell-${i}-${j}`; // Unique ID for each cell
             cell.classList.add('letter-box'); // Ensure styling is applied to each cell
             row.appendChild(cell);
         }
-        gameBoard.appendChild(row);
+        gameBoard.appendChild(row); // Append each row to the game board
     }
 }
 
